@@ -1,0 +1,21 @@
+name: "upper_case_pstr_sixseven67"
+limit: 1000
+memory_size: 2000
+memory_mapped_io:
+  0x80: ["sixseven67\n"]
+  0x84: []
+reports:
+  - name: "Result verification"
+    slice: last
+    view: |
+      numio[0x80]: {io:0x80:dec}
+      numio[0x84]: {io:0x84:dec}
+      symio[0x80]: {io:0x80:sym}
+      symio[0x84]: {io:0x84:sym}
+      {mem:dump:0x000:0x01f}
+    assert: |
+      numio[0x80]: [] >>> []
+      numio[0x84]: [] >>> [83,73,88,83,69,86,69,78,54,55]
+      symio[0x80]: "" >>> ""
+      symio[0x84]: "" >>> "SIXSEVEN67"
+      mem[0x000..0x01f]: 0a 53 49 58 53 45 56 45 4e 36 37 5f 5f 5f 5f 5f 5f 5f 5f 5f 5f 5f 5f 5f 5f 5f 5f 5f 5f 5f 5f 5f
